@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "hcai_workbench"
+version = "0.1.0"
+description = "Chat interface for ai.hackclub.com"
+authors = ["AfterNoon PM <h2o.Drop2010+github@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+openrouter = "^0.7.11"
+
+[tool.poetry.group.dev.dependencies]
+build = "^1.4.0"
+flake8 = "^7.3.0"
+pytest = "^9.0.2"
+twine = "^6.2.0"
+wheel = "^0.46.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
