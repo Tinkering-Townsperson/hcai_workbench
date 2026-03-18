@@ -1,30 +1,17 @@
 __version__ = "0.1.0"
 
-from pathlib import Path
+from pathlib import Path  # noqa
 
 from openrouter import OpenRouter
-
-from .config import load_config
-from .models import MODELS  # noqa
+from rich.console import Console
 
 
-USER_DATA_DIR = Path("~/.hcai_workbench").expanduser()
-CONFIG_FILE_PATH = USER_DATA_DIR / "settings.toml"
-
-config = load_config(CONFIG_FILE_PATH)
-
-client = OpenRouter(
-	api_key=config["api_key"],
-	server_url="https://ai.hackclub.com/proxy/v1",
-)
-
-
-def main(model: str = "qwen/qwen3-32b"):
+def main(model: str = "qwen/qwen3-32b", api_key: str = None, client: OpenRouter = None, console: Console = None):
 	_, model_friendly_name = model.split("/")
 	prompt = input(f"{model_friendly_name}> ")
 
-	while prompt.lower() != "q":
-		print(f"{model_friendly_name} is thinking...")
+	while prompt.lower() not in {"exit", "quit", "q", "bye"}:
+		console.print(f"[blue]{model_friendly_name} is thinking...[/blue]")
 		response = client.chat.send(
 			model=model,
 			messages=[
@@ -33,7 +20,7 @@ def main(model: str = "qwen/qwen3-32b"):
 			stream=False,
 		)
 
-		print(response.choices[0].message.content)
+		console.print(response.choices[0].message.content)
 		prompt = input(f"{model_friendly_name}> ")
 
-	print("Goodbye!")
+	console.print(":wave: Goodbye!")
