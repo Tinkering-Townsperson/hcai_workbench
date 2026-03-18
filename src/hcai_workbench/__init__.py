@@ -6,7 +6,8 @@ from openrouter import OpenRouter
 from rich.console import Console
 
 
-def main(model: str = "qwen/qwen3-32b", api_key: str = None, client: OpenRouter = None, console: Console = None):
+
+def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: Console = None):
 	_, model_friendly_name = model.split("/")
 	prompt = input(f"{model_friendly_name}> ")
 

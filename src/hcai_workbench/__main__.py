@@ -15,11 +15,10 @@ config = load_config(CONFIG_FILE_PATH)
 console = Console()
 
 client = OpenRouter(
-	api_key=config["api_key"],
+	api_key=config["defaults"]["api_key"],
 	server_url="https://ai.hackclub.com/proxy/v1",
 )
 
 
-if __name__ == "__main__":
-	console.print(f"[green]HCAI Workbench [b]v{__version__}[/]")
-	main(model="openai/gpt-oss-120b", api_key=config["api_key"], client=client, console=console)
+console.print(f"[green]HCAI Workbench [b]v{__version__}[/]")
+main(model=config["defaults"]["model"], client=client, console=console)

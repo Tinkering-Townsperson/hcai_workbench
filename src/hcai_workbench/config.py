@@ -3,12 +3,15 @@ from pathlib import Path
 
 
 def validate_config(config: dict):
-	assert "api_key" in config, "API key is required in the configuration."
+	assert "api_key" in config["defaults"], "API key is required in the configuration."
 
 
 def set_default_config(path: str) -> None:
 	default_config = {
-		"api_key": input("Please enter your API key: ")
+		"defaults": {
+			"api_key": input("Please enter your API key: "),
+			"model": "openai/gpt-5-mini"
+		}
 	}
 
 	save_config(default_config, path)
