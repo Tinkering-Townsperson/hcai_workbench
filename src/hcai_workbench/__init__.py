@@ -15,7 +15,13 @@ def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: C
 		try:
 			prompt = input(f"{model_friendly_name}> ")
 		except KeyboardInterrupt:
-			console.print("\nUse !exit, !quit, !q, or !bye to exit the application.")
+			console.print("^C")
+			console.print("Use !exit, !quit, !q, or !bye to exit the application.")
+			continue
+		except EOFError:
+			break
+
+		if len(prompt.strip()) == 0:
 			continue
 
 		if prompt[0] == "!":
@@ -61,6 +67,7 @@ def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: C
 					continue
 
 		console.print(f"[blue]{model_friendly_name} is thinking...[/blue]")
+
 		response = client.chat.send(
 			model=model,
 			messages=[
@@ -70,5 +77,6 @@ def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: C
 		)
 
 		console.print(response.choices[0].message.content)
+		console.print(f"[b]=> {response.usage.total_tokens:.0f} tokens[/]\n")
 
 	console.print(":wave: Goodbye!")
