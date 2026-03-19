@@ -6,7 +6,6 @@ from rich.console import Console
 from hcai_workbench import __version__, main
 
 from .config import load_config
-from .models import MODELS  # noqa
 
 USER_DATA_DIR = Path("~/.hcai_workbench").expanduser()
 CONFIG_FILE_PATH = USER_DATA_DIR / "settings.toml"
