@@ -10,7 +10,15 @@ from time import perf_counter
 from .models import MODELS
 
 
-def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: Console = None):
+def help_message(console: Console = None):
+	console.print("[blue]Available commands:[/]")
+	console.print("[yellow]!exit, !quit, !q, !bye[/] - Exit the application")
+	console.print("[yellow]!clear, !cls[/] - Clear the console")
+	console.print("[yellow]!model, !m[/] - Change the current model")
+	console.print("[yellow]!help, !h[/] - Show this help message")
+
+
+def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: Console = None, config_path: str = None):
 	_, model_friendly_name = model.split("/")
 
 	while True:
@@ -52,18 +60,9 @@ def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: C
 							_, model_friendly_name = model.split("/")
 							console.print(f"Model updated to: [yellow]{model}[/]")
 				case "help" | "h":
-					console.print("[blue]Available commands:[/]")
-					console.print("[yellow]!exit, !quit, !q, !bye[/] - Exit the application")
-					console.print("[yellow]!clear, !cls[/] - Clear the console")
-					console.print("[yellow]!model, !m[/] - Change the current model")
-					console.print("[yellow]!help, !h[/] - Show this help message")
+					help_message(console=console)
 				case _:
 					console.print(f"[red]Unknown command: {prompt}[/]\n")
-					console.print("[blue]Available commands:[/]")
-					console.print("[yellow]!exit, !quit, !q, !bye[/] - Exit the application")
-					console.print("[yellow]!clear, !cls[/] - Clear the console")
-					console.print("[yellow]!model, !m[/] - Change the current model")
-					console.print("[yellow]!help, !h[/] - Show this help message")
 
 			continue
 
