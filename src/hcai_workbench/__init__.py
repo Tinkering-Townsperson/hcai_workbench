@@ -4,6 +4,7 @@ from pathlib import Path  # noqa
 
 from openrouter import OpenRouter
 from rich.console import Console
+from animation import Wait
 
 from .models import MODELS
 
@@ -34,6 +35,7 @@ def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: C
 				case "model" | "m":
 					console.print(f"Current model: [yellow]{model}[/]")
 					new_model = ""
+
 					while new_model not in MODELS:
 						try:
 							new_model = input("Enter new model name (e.g. openai/gpt-5-mini) or l to list: ").lower()
@@ -66,8 +68,9 @@ def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: C
 					console.print("[yellow]!help, !h[/] - Show this help message")
 					continue
 
-		console.print(f"[blue]{model_friendly_name} is thinking...[/blue]")
+		thinking = Wait("elipses", f"{model_friendly_name} is thinking", color="blue")
 
+		thinking.start()
 		response = client.chat.send(
 			model=model,
 			messages=[
@@ -75,6 +78,7 @@ def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: C
 			],
 			stream=False,
 		)
+		thinking.stop()
 
 		console.print(response.choices[0].message.content)
 		console.print(f"[b]=> {response.usage.total_tokens:.0f} tokens[/]\n")

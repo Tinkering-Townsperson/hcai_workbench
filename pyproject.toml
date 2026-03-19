@@ -10,6 +10,7 @@ python = "^3.11"
 openrouter = "^0.7.11"
 tomlkit = "^0.14.0"
 rich = "^14.3.3"
+animation = "^0.0.7"
 
 [tool.poetry.group.dev.dependencies]
 build = "^1.4.0"
