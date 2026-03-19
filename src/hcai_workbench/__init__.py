@@ -48,7 +48,7 @@ def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: C
 					while new_model not in MODELS:
 						try:
 							new_model = input("Enter new model name (e.g. openai/gpt-5-mini) or l to list: ").lower()
-						except KeyboardInterrupt:
+						except KeyboardInterrupt or EOFError:
 							console.print("\nModel change cancelled.")
 							break
 
