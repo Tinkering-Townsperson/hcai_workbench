@@ -1,17 +1,18 @@
-from tomlkit import load, dump
+# from tomlkit import load, dump
+
+from configparser import ConfigParser
 from pathlib import Path
 
 
-def validate_config(config: dict):
-	assert "api_key" in config["defaults"], "API key is required in the configuration."
+def validate_config(config: ConfigParser):
+	assert "api_key" in config["DEFAULTS"], "API key is required in the configuration."
 
 
 def set_default_config(path: str) -> None:
-	default_config = {
-		"defaults": {
-			"api_key": input("Please enter your API key: "),
-			"model": "openai/gpt-5-mini"
-		}
+	default_config = ConfigParser()
+	default_config["DEFAULTS"] = {
+		"api_key": input("Please enter your API key: "),
+		"model": "openai/gpt-5-mini"
 	}
 
 	save_config(default_config, path)
@@ -22,8 +23,8 @@ def load_config(path: str) -> dict:
 	path = Path(path)
 
 	if path.exists():
-		with path.open('r') as f:
-			config = load(f)
+		config = ConfigParser()
+		config.read(path)
 	else:
 		config = set_default_config(path)
 
@@ -36,7 +37,7 @@ def load_config(path: str) -> dict:
 	return config
 
 
-def save_config(config: dict, path: str) -> None:
+def save_config(config: ConfigParser, path: str) -> None:
 	validate_config(config)
 
 	path = Path(path)
@@ -45,4 +46,4 @@ def save_config(config: dict, path: str) -> None:
 		path.parent.mkdir(parents=True)
 
 	with path.open('w') as f:
-		dump(config, f)
+		config.write(f)

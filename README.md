@@ -9,7 +9,7 @@ Chat interface for ai.hackclub.com
 - [ ] Simple interface (GUI/TUI)
 - [x] Ability to switch models
 - [x] API connection to [ai.hackclub.com](https://ai.hackclub.com/) through OpenRouter
-- [x] TOML config file
+- [x] ~~TOML~~ <ins>CFG</ins> config file
 
 ## Optional but desired
 
