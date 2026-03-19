@@ -5,6 +5,7 @@ from pathlib import Path  # noqa
 from openrouter import OpenRouter
 from rich.console import Console
 from animation import Wait
+from time import perf_counter
 
 from .models import MODELS
 
@@ -68,7 +69,7 @@ def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: C
 					console.print("[yellow]!help, !h[/] - Show this help message")
 					continue
 
-		thinking = Wait("elipses", f"{model_friendly_name} is thinking", color="blue")
+		thinking = Wait((".  ", ".. ", "..."), f"{model_friendly_name} is thinking", color="blue")
 
 		thinking.start()
 		response = client.chat.send(
