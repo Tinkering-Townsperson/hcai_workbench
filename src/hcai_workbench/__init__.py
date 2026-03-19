@@ -72,6 +72,7 @@ def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: C
 		thinking = Wait((".  ", ".. ", "..."), f"{model_friendly_name} is thinking", color="blue")
 
 		thinking.start()
+		start = perf_counter()
 		response = client.chat.send(
 			model=model,
 			messages=[
@@ -80,8 +81,9 @@ def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: C
 			stream=False,
 		)
 		thinking.stop()
+		end = perf_counter()
 
 		console.print(response.choices[0].message.content)
-		console.print(f"[b]=> {response.usage.total_tokens:.0f} tokens[/]\n")
+		console.print(f"[b]=> {response.usage.total_tokens:.0f} tokens, {(end - start) * 1000:.0f} ms[/]\n")
 
 	console.print(":wave: Goodbye!")
