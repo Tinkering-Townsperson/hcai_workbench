@@ -20,4 +20,4 @@ client = OpenRouter(
 
 
 console.print(f"[green]HCAI Workbench [b]v{__version__}[/]")
-main(model=config["defaults"]["model"], client=client, console=console)
+main(model=config["defaults"]["model"], client=client, console=console, config_path=CONFIG_FILE_PATH)

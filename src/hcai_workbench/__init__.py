@@ -15,6 +15,7 @@ def help_message(console: Console = None):
 	console.print("[yellow]!exit, !quit, !q, !bye[/] - Exit the application")
 	console.print("[yellow]!clear, !cls[/] - Clear the console")
 	console.print("[yellow]!model, !m[/] - Change the current model")
+	console.print("[yellow]!config, !cfg[/] - Show configuration file location")
 	console.print("[yellow]!help, !h[/] - Show this help message")
 
 
@@ -59,10 +60,13 @@ def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: C
 							model = new_model
 							_, model_friendly_name = model.split("/")
 							console.print(f"Model updated to: [yellow]{model}[/]")
+				case "config" | "cfg":
+					console.print(f"The configuration file is located at: [yellow]{config_path}[/]")
 				case "help" | "h":
 					help_message(console=console)
 				case _:
 					console.print(f"[red]Unknown command: {prompt}[/]\n")
+					help_message(console=console)
 
 			continue
 
