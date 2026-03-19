@@ -32,7 +32,6 @@ def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: C
 					break
 				case "clear" | "cls":
 					console.clear()
-					continue
 				case "model" | "m":
 					console.print(f"Current model: [yellow]{model}[/]")
 					new_model = ""
@@ -52,14 +51,12 @@ def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: C
 							model = new_model
 							_, model_friendly_name = model.split("/")
 							console.print(f"Model updated to: [yellow]{model}[/]")
-					continue
 				case "help" | "h":
 					console.print("[blue]Available commands:[/]")
 					console.print("[yellow]!exit, !quit, !q, !bye[/] - Exit the application")
 					console.print("[yellow]!clear, !cls[/] - Clear the console")
 					console.print("[yellow]!model, !m[/] - Change the current model")
 					console.print("[yellow]!help, !h[/] - Show this help message")
-					continue
 				case _:
 					console.print(f"[red]Unknown command: {prompt}[/]\n")
 					console.print("[blue]Available commands:[/]")
@@ -67,7 +64,8 @@ def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: C
 					console.print("[yellow]!clear, !cls[/] - Clear the console")
 					console.print("[yellow]!model, !m[/] - Change the current model")
 					console.print("[yellow]!help, !h[/] - Show this help message")
-					continue
+
+			continue
 
 		thinking = Wait((".  ", ".. ", "..."), f"{model_friendly_name} is thinking", color="blue")
 
