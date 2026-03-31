@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-openrouter = "^0.7.11"
+openrouter = "^0.8.0"
 tomlkit = "^0.14.0"
 rich = "^14.3.3"
 animation = "^0.0.7"
