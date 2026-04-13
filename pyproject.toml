@@ -15,7 +15,7 @@ animation = "^0.0.7"
 [tool.poetry.group.dev.dependencies]
 build = "^1.4.0"
 flake8 = "^7.3.0"
-pytest = "^9.0.2"
+pytest = "^9.0.3"
 twine = "^6.2.0"
 wheel = "^0.46.3"
 
