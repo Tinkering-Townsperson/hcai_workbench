@@ -39,13 +39,12 @@ endif
 
 PROJECT_NAME := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
 PROJECT_SRC := src/$(PROJECT_NAME)/
-PROJECT_VERSION := $(shell python -c "import $(TOMLLIB);f=open('pyproject.toml', 'rb'); toml=tomllib.load(f); print(toml['tool']['poetry']['version'])")
+PROJECT_VERSION := $(shell python -c "import $(TOMLLIB);f=open('pyproject.toml', 'rb'); toml=tomllib.load(f); print(toml['project']['version'])")
 PROJECT_OUTDIR := "./dist/v$(PROJECT_VERSION)"
 
 PYTEST_ARGS := -v
 MAX_LINE_LENGTH := 127
 FLAKE8_EXCLUDE := $(VENV_DIR),*.bak,*.tmp
-BUILD_ARGS := --outdir=$(PROJECT_OUTDIR)
 
 ifeq ($(OS),Windows_NT)
 	VENV_BIN_DIR := $(VENV_DIR)/Scripts
@@ -61,7 +60,6 @@ endif
 # Targets
 venv: $(VENV_DIR)
 all: clean venv install-dev lint test build clean
-deploy: all publish
 
 ver: pyproject.toml
 	echo "$(PROJECT_NAME) v$(PROJECT_VERSION) on python v$(PYTHON_VERSION)"
@@ -85,13 +83,11 @@ install-no-root: pyproject.toml $(VENV_DIR)/
 	poetry install --no-root
 
 build: pyproject.toml $(VENV_DIR)/
-	poetry run python -m build $(BUILD_ARGS)
+	poetry install --with=dev
+	poetry run pyinstaller --noconfirm --onefile --console --icon "P:\hcai_workbench\icon.ico"  .\src\hcai_workbench\__main__.py --name="hcai_workbench-v$(PROJECT_VERSION)"
 
 test: tests/
 	poetry run pytest $(PYTEST_ARGS)
-
-publish:
-	poetry run twine upload -r pypi $(PROJECT_OUTDIR)/**
 
 lint:
 # stop the build if there are Python syntax errors or undefined names.

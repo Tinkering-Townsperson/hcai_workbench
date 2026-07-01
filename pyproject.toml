@@ -6,7 +6,7 @@ authors = [
 	{ name = "Paya Maroufi", email = "h2o.Drop2010+github@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.11,<4.0"
+requires-python = ">=3.11,<3.16"
 
 dependencies = [
 	"rich>=15.0.0,<16.0.0",
@@ -30,6 +30,7 @@ dev = [
 	"pytest (>=9.0.2,<10.0.0)",
 	"twine (>=6.2.0,<7.0.0)",
 	"wheel (>=0.47.0,<0.48.0)",
+	"pyinstaller (>=6.21.0,<7.0.0)",
 ]
 
 [build-system]
