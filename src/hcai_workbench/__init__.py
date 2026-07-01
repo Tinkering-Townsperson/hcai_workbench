@@ -66,7 +66,7 @@ def main(api_key: str, console: Console, config_path: os.PathLike, model: str = 
 				case "config" | "cfg":
 					console.print(f"The configuration file is located at: [yellow]{config_path}[/]")
 				case "context" | "ctx":
-					context_action = console.input(f"Would you like to (1) see the current context or (2) clear the context?")
+					context_action = console.input("Would you like to (1) see the current context or (2) clear the context?")
 					if context_action == "1":
 						console.print(message_history)
 					elif context_action == "2":
