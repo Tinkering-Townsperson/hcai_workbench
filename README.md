@@ -4,6 +4,8 @@
 
 Chat interface for ai.hackclub.com
 
+![Screenshot of HCAI Workbench in action](./screenshot.png)
+
 ## Development
 
 ### Required features
