@@ -8,7 +8,7 @@ Chat interface for ai.hackclub.com
 
 ### Required features
 
-- [ ] Simple interface (GUI/TUI)
+- [ ] ~~Simple interface (GUI/TUI)~~ <- I decided not to proceed with this for now, as I have had an interesting idea for a future project involving a... discord bot?
 - [x] Ability to switch models
 - [x] API connection to [ai.hackclub.com](https://ai.hackclub.com/) through OpenRouter
 - [x] ~~TOML~~ <ins>CFG</ins> config file
@@ -16,6 +16,7 @@ Chat interface for ai.hackclub.com
 ### Optional but desired
 
 - [x] Chat history
+  - [x] Ability to clear context
 - [ ] Advanced interface (tabs, etc)
 - [ ] Profiles (different api key/model combinations)
 

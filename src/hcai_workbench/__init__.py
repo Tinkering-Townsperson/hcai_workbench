@@ -51,7 +51,7 @@ def main(api_key: str, console: Console, config_path: os.PathLike, model: str = 
 
 					while new_model not in MODELS:
 						try:
-							new_model = input("Enter new model name (e.g. openai/gpt-5-mini) or l to list: ").lower()
+							new_model = console.input("Enter new model name (e.g. openai/gpt-5-mini) or l to list: ").lower()
 						except KeyboardInterrupt or EOFError:
 							console.print("\nModel change cancelled.")
 							break
@@ -66,6 +66,16 @@ def main(api_key: str, console: Console, config_path: os.PathLike, model: str = 
 							console.print(f"Model updated to: [yellow]{model}[/]")
 				case "config" | "cfg":
 					console.print(f"The configuration file is located at: [yellow]{config_path}[/]")
+				case "context" | "ctx":
+					context_action = console.input(f"Would you like to (1) see the current context or (2) clear the context?")
+					if context_action == "1":
+						console.print(message_history)
+					elif context_action == "2":
+						confirmation = console.input("Are you sure you would like to clear the context? (y/N) ?")
+						if confirmation == "y":
+							message_history.clear()
+					else:
+						console.print("Not a valid choice.")
 				case "help" | "h":
 					help_message(console=console)
 				case _:
