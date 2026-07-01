@@ -15,7 +15,7 @@ Chat interface for ai.hackclub.com
 
 ### Optional but desired
 
-- [ ] Chat history
+- [x] Chat history
 - [ ] Advanced interface (tabs, etc)
 - [ ] Profiles (different api key/model combinations)
 

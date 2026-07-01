@@ -1,8 +1,10 @@
 __version__ = "0.1.0"
 
+import os
 from pathlib import Path  # noqa
 
 from openrouter import OpenRouter
+import requests
 from rich.console import Console
 from animation import Wait
 from time import perf_counter
@@ -19,8 +21,10 @@ def help_message(console: Console = None):
 	console.print("[yellow]!help, !h[/] - Show this help message")
 
 
-def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: Console = None, config_path: str = None):
+def main(api_key: str, console: Console, config_path: os.PathLike, model: str = "openai/gpt-5-mini"):
 	_, model_friendly_name = model.split("/")
+
+	message_history: list[dict] = []
 
 	while True:
 		try:
@@ -35,7 +39,7 @@ def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: C
 		if len(prompt.strip()) == 0:
 			continue
 
-		if prompt[0] == "!":
+		if prompt.startswith("!"):
 			match prompt[1:]:
 				case "exit" | "quit" | "q" | "bye":
 					break
@@ -70,21 +74,41 @@ def main(model: str = "openai/gpt-5-mini", client: OpenRouter = None, console: C
 
 			continue
 
+		message_history.append(
+			{
+				"type": "message",
+				"role": "user",
+				"content": [{"type": "input_text", "text": prompt}]
+			}
+		)
+
 		thinking = Wait((".  ", ".. ", "..."), f"{model_friendly_name} is thinking", color="blue")
 
 		thinking.start()
 		start = perf_counter()
-		response = client.chat.send(
-			model=model,
-			messages=[
-				{"role": "user", "content": prompt}
-			],
-			stream=False,
+		response = requests.post(
+			'https://ai.hackclub.com/proxy/v1/responses',
+			headers={
+				'Authorization': f"Bearer {api_key}",
+				'Content-Type': 'application/json',
+			},
+			json={
+				"model": model,
+				"input": message_history,
+				"max_output_tokens": 9000,
+			}
 		)
+		response.raise_for_status()
 		thinking.stop()
 		end = perf_counter()
 
-		console.print(response.choices[0].message.content)
-		console.print(f"[b]=> {response.usage.total_tokens:.0f} tokens, {(end - start) * 1000:.0f} ms[/]\n")
+		result = response.json()
+		for output in result["output"]:
+			if output["type"] == "message":
+				console.print(output["content"][0]["text"])
+				message_history.append(output)
+				break
+
+		console.print(f"[b]=> {result["usage"]["total_tokens"]:.0f} tokens, {(end - start) * 1000:.0f} ms[/]\n")
 
 	console.print(":wave: Goodbye!")
