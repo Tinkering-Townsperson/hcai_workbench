@@ -17,6 +17,7 @@ def help_message(console: Console):
 	console.print("[yellow]!clear, !cls[/] - Clear the console")
 	console.print("[yellow]!model, !m[/] - Change the current model")
 	console.print("[yellow]!config, !cfg[/] - Show configuration file location")
+	console.print("[yellow]!context, !ctx[/] - Show or reset the current context")
 	console.print("[yellow]!help, !h[/] - Show this help message")
 
 
