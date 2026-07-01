@@ -1,4 +1,4 @@
-__version__ = "0.1.0"
+__version__ = "1.0.0"
 
 import os
 from pathlib import Path  # noqa
@@ -7,8 +7,6 @@ import requests
 from rich.console import Console
 from animation import Wait
 from time import perf_counter
-
-from .models import MODELS
 
 
 def help_message(console: Console):
@@ -48,6 +46,7 @@ def main(api_key: str, console: Console, config_path: os.PathLike, model: str = 
 				case "model" | "m":
 					console.print(f"Current model: [yellow]{model}[/]")
 					new_model = ""
+					from .models import MODELS
 
 					while new_model not in MODELS:
 						try:
