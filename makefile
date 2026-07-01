@@ -84,7 +84,7 @@ install-no-root: pyproject.toml $(VENV_DIR)/
 
 build: pyproject.toml $(VENV_DIR)/
 	poetry install --with=dev
-	poetry run pyinstaller --noconfirm --onefile --console --icon "P:\hcai_workbench\icon.ico"  .\src\hcai_workbench\__main__.py --name="hcai_workbench-v$(PROJECT_VERSION)"
+	poetry run pyinstaller --noconfirm --onefile --console --icon "P:/hcai_workbench/icon.ico"  ./src/hcai_workbench/__main__.py --name="hcai_workbench-v$(PROJECT_VERSION)"
 
 test: tests/
 	poetry run pytest $(PYTEST_ARGS)
