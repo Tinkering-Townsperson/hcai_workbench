@@ -40,3 +40,8 @@ On the first run, HCAI Workbench will ask you for an API key. If you haven't alr
 ## New feature - Experiments!
 
 I was asking the different models the viral "how many Rs in strawberry" prompt to test the app and the switching of models when I thought of something: What if I integrated these sorts of funny experiments into the app itself? Read more and test them out in [the `experiments` module](./src/hcai_workbench/experiments/README.md)
+
+
+## AI Use
+
+AI was used to generate tests for this project, but nothing more. My goal for this project was to rely less on AI than I have for my other horizons projects.
