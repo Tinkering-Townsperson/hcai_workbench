@@ -1,21 +1,36 @@
-[tool.poetry]
+[project]
 name = "hcai_workbench"
-version = "0.1.0"
+version = "1.0.0"
 description = "Chat interface for ai.hackclub.com"
-authors = ["AfterNoon PM <h2o.Drop2010+github@gmail.com>"]
+authors = [
+	{ name = "Paya Maroufi", email = "h2o.Drop2010+github@gmail.com"}
+]
 readme = "README.md"
+requires-python = ">=3.11,<4.0"
 
-[tool.poetry.dependencies]
-python = "^3.11"
-rich = "^14.3.3"
-animation = "^0.0.7"
+dependencies = [
+	"rich>=15.0.0,<16.0.0",
+	"animation==0.0.7"
+]
 
-[tool.poetry.group.dev.dependencies]
-build = "^1.4.0"
-flake8 = "^7.3.0"
-pytest = "^9.0.2"
-twine = "^6.2.0"
-wheel = "^0.46.3"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "Topic :: Communications :: Chat",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Operating System :: OS Independent",
+]
+
+[dependency-groups]
+dev = [
+	"build (>=1.4.0,<2.0.0)",
+	"flake8 (>=7.3.0,<7.4.0)",
+	"pytest (>=9.0.2,<10.0.0)",
+	"twine (>=6.2.0,<7.0.0)",
+	"wheel (>=0.47.0,<0.48.0)",
+]
 
 [build-system]
 requires = ["poetry-core"]
