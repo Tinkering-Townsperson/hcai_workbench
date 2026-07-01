@@ -3,7 +3,7 @@ from pathlib import Path
 from rich.console import Console
 
 from hcai_workbench import __version__, main
-from .config import load_config
+from hcai_workbench.config import load_config
 
 # USER_DATA_DIR = Path("~/.hcai_workbench").expanduser()
 
