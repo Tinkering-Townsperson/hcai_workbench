@@ -1,33 +1,20 @@
-MODELS = (
-	"bytedance-seed/seed-1.6-flash",
-	"deepseek/deepseek-r1-0528",
-	"deepseek/deepseek-r1-distill-qwen-32b",
-	"deepseek/deepseek-v3.2",
-	"deepseek/deepseek-v3.2-exp",
-	"deepseek/deepseek-v3.2-speciale",
-	"google/gemini-2.5-flash",
-	"google/gemini-2.5-flash-lite-preview-09-2025",
-	"google/gemini-3-flash-preview",
-	"google/gemini-3.1-flash-lite-preview",
-	"liquid/lfm-2-24b-a2b",
-	"minimax/minimax-m2-her",
-	"minimax/minimax-m2.1",
-	"minimax/minimax-m2.5",
-	"moonshotai/kimi-k2-0905",
-	"moonshotai/kimi-k2-thinking",
-	"moonshotai/kimi-k2.5",
-	"nvidia/nemotron-nano-12b-v2-vl",
-	"openai/gpt-5-mini",
-	"openai/gpt-oss-120b",
-	"qwen/qwen3-235b-a22b",
-	"qwen/qwen3-32b",
-	"qwen/qwen3-next-80b-a3b-instruct",
-	"qwen/qwen3-vl-235b-a22b-instruct",
-	"qwen/qwen3.5-397b-a17b",
-	"stepfun/step-3.5-flash",
-	"x-ai/grok-4.1-fast",
-	"z-ai/glm-4.6",
-	"z-ai/glm-4.7",
-	"z-ai/glm-4.7-flash",
-	"z-ai/glm-5",
-)
+import requests
+from pprint import pp
+
+model_list = "https://ai.hackclub.com/proxy/v1/models"
+
+MODELS = set()
+
+response = requests.get(model_list)
+response.raise_for_status()
+result = response.json()["data"]
+
+for model in result:
+	if model["architecture"]["output_modalities"] == ["text",]:
+		MODELS.add(model["id"])
+
+MODELS = sorted(MODELS)
+
+if __name__ == "__main__":
+	pp(MODELS)
+	print(len(MODELS))
