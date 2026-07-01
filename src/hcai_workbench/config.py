@@ -1,4 +1,4 @@
-from os import PathLike
+import os
 from configparser import ConfigParser
 from pathlib import Path
 
@@ -7,7 +7,7 @@ def validate_config(config: ConfigParser):
 	assert "api_key" in config["DEFAULTS"], "API key is required in the configuration."
 
 
-def set_default_config(path: PathLike) -> None:
+def set_default_config(path: os.PathLike) -> ConfigParser:
 	default_config = ConfigParser()
 	default_config["DEFAULTS"] = {
 		"api_key": input("Please enter your API key: "),
@@ -18,7 +18,7 @@ def set_default_config(path: PathLike) -> None:
 	return default_config
 
 
-def load_config(path: PathLike) -> dict:
+def load_config(path: os.PathLike) -> dict:
 	path = Path(path)
 
 	if path.exists():
@@ -36,7 +36,7 @@ def load_config(path: PathLike) -> dict:
 	return config
 
 
-def save_config(config: ConfigParser, path: PathLike) -> None:
+def save_config(config: ConfigParser, path: os.PathLike) -> None:
 	validate_config(config)
 
 	path = Path(path)

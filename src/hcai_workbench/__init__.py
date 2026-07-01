@@ -3,7 +3,6 @@ __version__ = "0.1.0"
 import os
 from pathlib import Path  # noqa
 
-from openrouter import OpenRouter
 import requests
 from rich.console import Console
 from animation import Wait
@@ -12,7 +11,7 @@ from time import perf_counter
 from .models import MODELS
 
 
-def help_message(console: Console = None):
+def help_message(console: Console):
 	console.print("[blue]Available commands:[/]")
 	console.print("[yellow]!exit, !quit, !q, !bye[/] - Exit the application")
 	console.print("[yellow]!clear, !cls[/] - Clear the console")
