@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['src\\hcai_workbench\\__main__.py'],
+    ['src/hcai_workbench/__main__.py'],
     pathex=[],
     binaries=[],
     datas=[],
@@ -35,5 +35,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['P:\\hcai_workbench\\icon.ico'],
+    icon=['icon.ico'],
 )
