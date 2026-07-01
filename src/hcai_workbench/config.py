@@ -1,5 +1,4 @@
-# from tomlkit import load, dump
-
+from os import PathLike
 from configparser import ConfigParser
 from pathlib import Path
 
@@ -8,7 +7,7 @@ def validate_config(config: ConfigParser):
 	assert "api_key" in config["DEFAULTS"], "API key is required in the configuration."
 
 
-def set_default_config(path: str) -> None:
+def set_default_config(path: PathLike) -> None:
 	default_config = ConfigParser()
 	default_config["DEFAULTS"] = {
 		"api_key": input("Please enter your API key: "),
@@ -19,7 +18,7 @@ def set_default_config(path: str) -> None:
 	return default_config
 
 
-def load_config(path: str) -> dict:
+def load_config(path: PathLike) -> dict:
 	path = Path(path)
 
 	if path.exists():
@@ -37,7 +36,7 @@ def load_config(path: str) -> dict:
 	return config
 
 
-def save_config(config: ConfigParser, path: str) -> None:
+def save_config(config: ConfigParser, path: PathLike) -> None:
 	validate_config(config)
 
 	path = Path(path)
